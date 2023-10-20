@@ -27,6 +27,6 @@
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "project": "./Ilaris_flight_diaries/server/tsconfig.json"
+      "project": "./Patientor/server/tsconfig.json"
     },
   }
