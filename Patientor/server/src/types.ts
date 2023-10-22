@@ -4,3 +4,16 @@ export interface DiagnoseEntry {
     name: string;
     latin?: string;
 }
+
+export type Patient = 'id' | 'name' | 'dateOfBirth' |'ssn'|'gender'| 'occupation';
+
+export interface PatientEntry {
+    id: string;
+    name: string;
+    dateOfBirth: string;    
+    ssn: string;
+    gender: string;
+    occupation: string;
+}
+
+export type NonSensitivePatientEntry = Omit<PatientEntry, 'ssn'>;
