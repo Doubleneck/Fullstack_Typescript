@@ -1,14 +1,23 @@
+import Part from './Part';
+
 interface ContentProps {
-    parts: { name: string; exerciseCount: number }[];
+    parts: { name: string;
+      exerciseCount: number;
+      description?: string;
+      groupProjectCount?: number;
+      backgroundMaterial?: string;
+      requirements?: string[];
+      kind: string;}[];
 }
 
 const Content = (props:ContentProps) => { 
 
   return (
     <>{props.parts.map((part, index) => (
-      <p key={index}>
-        {part.name} {part.exerciseCount}
-      </p>
+      < div key={index}>
+        
+        <Part part={part} />
+      </div>
     ))}</>
   );
 };
