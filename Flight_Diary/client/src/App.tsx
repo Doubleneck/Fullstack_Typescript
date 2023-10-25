@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { DiaryEntry } from './types';  
+import DiaryForm from './DiaryForm';
 
 
 
@@ -13,9 +14,15 @@ function App() {
       setDiaries(response.data);
     });
   }, []);
+
+  const addDiaryEntry = (newDiary: DiaryEntry) => {
+    // Update the state with the new diary entry
+    setDiaries([...diaries, newDiary]);
+  };
   
   return (
     <div>
+      <DiaryForm onDiaryAdded={addDiaryEntry} />
       <h1>Diary Entries:</h1>
       <ul>
         {diaries.map(diary => (
