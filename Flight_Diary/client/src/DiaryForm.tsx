@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { DiaryEntry } from './types';
 
 interface DiaryFormProps {
-    onDiaryAdded: React.Dispatch<never>;
+    onDiaryAdded: React.Dispatch<DiaryEntry>;
   }
   
 function DiaryForm({ onDiaryAdded }: DiaryFormProps) {
@@ -13,12 +14,12 @@ function DiaryForm({ onDiaryAdded }: DiaryFormProps) {
     comment: '',
   });
   
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
   
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       console.log('formData:', formData);  
@@ -51,7 +52,7 @@ function DiaryForm({ onDiaryAdded }: DiaryFormProps) {
         <br />
         <label>
             Comment:
-          <textarea name="comment" value={formData.comment} onChange={handleInputChange} />
+          <input name="comment" value={formData.comment} onChange={handleInputChange} />
         </label>
         <br />
         <button type="submit">Add Entry</button>
