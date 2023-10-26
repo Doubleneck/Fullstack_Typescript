@@ -19,6 +19,8 @@ function DiaryForm({ onDiaryAdded }: DiaryFormProps) {
     setFormData({ ...formData, [name]: value });
   };
   
+  const [formError, setFormError] = useState<string | null>(null); // State for error message
+
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
@@ -26,14 +28,18 @@ function DiaryForm({ onDiaryAdded }: DiaryFormProps) {
       const response = await axios.post('http://localhost:3000/api/diaries', formData);
       onDiaryAdded(response.data); // Notify the parent component about the new diary entry
       setFormData({ date: '', weather: '', comment: '', visibility: '' }); // Clear the form
-    } catch (error) {
+      setFormError(null); // Clear any previous errors
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+    } catch (error:any) {
       console.error('Error posting diary entry:', error);
+      setFormError(error.response.data); // Set the error message
     }
   };
   
   return (
     <div>
       <h2>Add a New Diary Entry</h2>
+      {formError && <div style={{ color: 'red' }}>{formError}</div>}
       <form onSubmit={handleSubmit}>
         <label>
             Date:
