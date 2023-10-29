@@ -11,6 +11,7 @@ patientRouter.get('/', (_req, res) => {
 
 patientRouter.get('/:id', (_req, res) => {
   const patient = patientService.getEntries().find(p => p.id === _req.params.id);
+  
   if (patient) {
     res.send(patient);
   } else {
