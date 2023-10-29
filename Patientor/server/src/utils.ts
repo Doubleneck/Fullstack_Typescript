@@ -1,4 +1,12 @@
 import { NewPatientEntry } from './types';
+
+
+export enum Gender {
+  Male = 'male',
+  Female = 'female',
+  Other = 'other',
+}
+
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
@@ -7,21 +15,26 @@ const isGender = (param: string): param is Gender => {
 };
 
 
-const parseGender = (gender: unknown): string => {
+
+const parseGender = (gender: unknown): Gender => {
   if (!gender || !isString(gender)) {
     throw new Error('Incorrect or missing gender');
   }
   if (!isGender(gender)){
     throw new Error('Gender must be: female, male or other');
   }
-  return gender;
+  if (gender === Gender.Male) {
+    return Gender.Male;
+  }
+  else if (gender === Gender.Female) {
+    return Gender.Female;
+  }
+  else if (gender === Gender.Other) {
+    return Gender.Other;
+  }
+  throw new Error('Unexpected gender value');
 };
 
-export enum Gender {
-    Male = 'male',
-    Female = 'female',
-    Other = 'other',
-}
 
 
 const toNewPatientEntry = (object: unknown): NewPatientEntry => {
