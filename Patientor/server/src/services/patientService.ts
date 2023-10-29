@@ -7,12 +7,13 @@ const getEntries = (): PatientEntry[] => {
 };
 
 const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
-  return patients_data.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+  return patients_data.map(({ id, name, dateOfBirth, gender, occupation, entries}) => ({
     id,
     name,
     dateOfBirth,
     gender,
-    occupation
+    occupation,
+    entries
   }));
 };
 

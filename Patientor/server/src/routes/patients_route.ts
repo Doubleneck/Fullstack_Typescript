@@ -9,7 +9,15 @@ patientRouter.get('/', (_req, res) => {
   res.send(patientService.getNonSensitiveEntries());
 });
 
-
+patientRouter.get('/:id', (_req, res) => {
+  const patient = patientService.getEntries().find(p => p.id === _req.params.id);
+  if (patient) {
+    res.send(patient);
+  } else {
+    res.sendStatus(404);
+  }
+});
+ 
 patientRouter.post('/', (_req, res) => {
   try {
            
