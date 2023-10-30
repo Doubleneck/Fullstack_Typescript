@@ -1,11 +1,7 @@
-import { NewPatientEntry } from './types';
+import { NewPatientEntry , Gender} from './types';
 
 
-export enum Gender {
-  Male = 'male',
-  Female = 'female',
-  Other = 'other',
-}
+
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
