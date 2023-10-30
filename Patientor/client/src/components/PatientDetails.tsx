@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import patientService from '../services/patients';
-import { Patient } from '../types';
+import { Gender, Patient } from '../types';
 import { Avatar, Typography } from '@mui/material'; // Import Material-UI components
 import { Male, Female } from '@mui/icons-material'; // Import Material-UI Icons
 
@@ -23,8 +23,8 @@ const PatientDetails = () => {
   }, [id]);
 
   // Define a function to render the appropriate gender icon
-  const renderGenderIcon = (gender: string) => {
-    switch (gender) {
+  const renderGenderIcon = (gender: Gender | undefined) => {
+    switch (gender ?? '') {
     case 'male':
       return <Male />;
     case 'female':
@@ -47,6 +47,20 @@ const PatientDetails = () => {
       <p>SSN: {loadedPatient?.ssn}</p>
       <p>Occupation: {loadedPatient?.occupation}</p>
       <p>Date of Birth: {loadedPatient?.dateOfBirth}</p>
+      <Typography variant="h6">
+        entries
+      </Typography>
+      {loadedPatient?.entries.map((entry) => (  
+        
+        <div key={entry.id}>
+          <p>{entry.date} {entry.description}</p>
+          <ul>
+            {entry.diagnosisCodes?.map((code) => (
+              <li key={code}>{code}</li>
+            ))}
+          </ul>
+        </div>  
+      ))}
     </div>
   );
 };
